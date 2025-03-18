@@ -2,11 +2,18 @@ let tabScrollPositions = {
     home: 0,
     portfolio: 0,
     'debug-diaries': 0,
+    'engg-diaries': 0,
     'vuln-diaries': 0,
     podcast: 0
 };
 let lastActiveTab = 'home';
-
+function removeSuffix(str, suffix) {
+    if (str.endsWith(suffix)) {
+      return str.slice(0, -suffix.length);
+    }
+    return str;
+  }
+  
 function showTab(tabId, element) {
     if (lastActiveTab === tabId) return;
     
@@ -32,6 +39,12 @@ function showTab(tabId, element) {
     }, 300);
     
     lastActiveTab = tabId;
+
+    if(tabId.endsWith("-diaries")){
+        var rssTab = removeSuffix(tabId,"-diaries");
+        feedMeta[rssTab].show();
+    }
+
 }
 
 window.addEventListener('scroll', function() {

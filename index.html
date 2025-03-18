@@ -10,14 +10,15 @@
     <div class="navbar" id="navbar">
         <a id="tab-home" class="active" onclick="showTab('home', this)">Home</a>
         <a id="tab-portfolio" onclick="showTab('portfolio', this)">Portfolio</a>
-        <a id="tab-debug-diaries" onclick="showTab('debug-diaries', this)" style="display: none;">Debug Diaries</a>
-        <a id="tab-vuln-diaries" onclick="showTab('vuln-diaries', this)" style="display: none;">Vuln Diaries</a>
+        <a id="tab-debug-diaries" onclick="showTab('debug-diaries', this)">Debug Diaries</a>
+        <a id="tab-engg-diaries" onclick="showTab('engg-diaries', this)">Engg Diaries</a>
+        <a id="tab-vuln-diaries" onclick="showTab('vuln-diaries', this)">Vuln Diaries</a>
         <a id="tab-podcast" onclick="showTab('podcast', this)" style="display: none;">Podcast</a> <!-- Hidden Podcast Tab -->
     </div>
     
     <div id="home" class="content active left_align" data-scroll="0">
       <h1>Greetings! 👨‍💻</h1>
-<h2>I'm <span class="fullname">Mukilarasan Ravi</span></h2>
+<h2>I'm <span class="highlight">Mukilarasan Ravi</span></h2>
 <h3>Software Engineer | Java Backend Expert</h3>
 <p>
     Experienced software engineer with over a decade of expertise in 
@@ -44,7 +45,7 @@
 
     </div>
     <div id="portfolio" class="content" data-scroll="0">
-        <div id="timeline" class="timelinebody">
+        <div id="timeline" class="timeline">
           <div id="timeline">
             <div>
               <section class="year">
@@ -188,22 +189,29 @@
     </div>
     
     <div id="debug-diaries" class="content" data-scroll="0">
-        <h1>Debug Diaries</h1>
-        <div class="dummy-text">Vestibulum lacinia arcu eget nulla. Class aptent taciti sociosqu ad litora torquent.</div>
-        <div class="dummy-text">Suspendisse in justo eu magna luctus suscipit.</div>
+      
+  </div>
+    <div id="engg-diaries" class="content" data-scroll="0">
+
     </div>
     <div id="vuln-diaries" class="content" data-scroll="0">
-        <h1>Vuln Diaries</h1>
-        <div class="dummy-text">Phasellus volutpat metus eget egestas viverra.</div>
-        <div class="dummy-text">Donec venenatis vulputate lorem. Suspendisse potenti.</div>
+      <div id="vuln-no-post" class="terminal" style="display: none">
+        <p>Access Denied: <span class="highlight">The blog is still under lock and key</span>—nothing to see here yet. Check back soon to see what we've unlocked.</p>
+      </div>
     </div>
     <div id="podcast" class="content" data-scroll="0">
         <h1>Podcast</h1>
         <div class="dummy-text">Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes.</div>
         <div class="dummy-text">Fusce nec tellus sed augue semper porta.</div>
     </div>
+    <div class="loader-container" style="display: none;">
+      <div class="loading-text">Loading from Blogger</div>
+      <div class="loader"></div>
+    </div>
+    <script src="js/home.js">
+    </script>
+    <script src="js/rss.js">
 
-    <script src="js/home.js">    
     </script>
 </body>
 </html>

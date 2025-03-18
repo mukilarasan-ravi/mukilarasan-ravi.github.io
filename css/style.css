@@ -59,7 +59,7 @@ body {
     padding: 20px;
 }
 
-.timelinebody {
+.timeline {
     height: inherit;
     display: flex;
     flex-direction: column;
@@ -69,24 +69,7 @@ body {
     color: #79838c;
     text-align: left !important;
 }
-/* div.navbar:after {
-    content: '';
-    position: absolute;
-    bottom: -5rem;
-    left: 0rem;
-    height: 5.1rem;
-    display: block;
-    width: 100%;
-    z-index: 300;
-    background: -moz-linear-gradient(top, white 20%, rgba(255, 255, 255, 0) 100%);
-    /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, white 20%, rgba(255, 255, 255, 0) 100%);
-    /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, white 20%, rgba(255, 255, 255, 0) 100%);
-    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
-    /* IE6-9 */
-  } */
+
 a {
     color: #50585f;
     text-decoration: none;
@@ -95,6 +78,80 @@ a:hover {
     color: #383e44;
 }
 
+
+/*
+centered timeline css
+*/
+@media (min-width: 822px) {
+#timeline-centered {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    margin: auto;
+    padding: 50px 0;
+}
+
+#timeline-centered::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 4px;
+    background: #C5C5C5;
+    transform: translateX(-50%);
+}
+
+/* Timeline events */
+.timeline-event {
+    position: relative;
+    width: 45%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Alternate event alignment */
+.timeline-event:nth-child(odd) {
+    align-self: flex-end;
+    text-align: left;
+    padding-left: 40px;
+}
+
+.timeline-event:nth-child(even) {
+    align-self: flex-start;
+    text-align: right;
+    padding-right: 40px;
+}
+
+/* Event markers (dots) */
+.timeline-event::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: white;;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    border: 4px solid salmon;
+    z-index: 2;
+}
+
+.timeline-event:nth-child(odd)::before {
+    left: -48px;  /* Adjusted for alignment */
+}
+
+.timeline-event:nth-child(even)::before {
+    right: -48px; /* Adjusted for alignment */
+}
+
+}
+/*
+general timeline css
+*/
 #timeline {
     position: relative;
     display: table;
@@ -104,7 +161,7 @@ a:hover {
     /* margin-top: 1rem; */
     width: 100%;
 }
-#timeline div:after {
+#timeline div:after{
     content: '';
     width: 4px;
     position: absolute;
@@ -203,16 +260,147 @@ a:hover {
     font-weight: 500;
 }
 
-span.fullname {
-    color: salmon;
-    font-weight: 500;
-}
-
 #timeline section.year section ul li span.result {
     color: #2c3e50;
     font-weight: bold;
 }
 span.software {
     color: #2c3e50;
+    font-weight: 500;
+}
+
+/*
+Loading spin related css
+*/
+
+.loader-container {
+display: flex;
+justify-content: center;
+align-items: center;
+margin: 0;
+flex-direction: column; /* Stack text and spinner vertically */
+text-align: center; /* Center align the text and spinner */
+}
+
+.loader {
+border: 8px solid #f3f3f3; /* Light gray background */
+border-top: 8px solid #3498db; /* Blue color for the spinner */
+border-radius: 50%;
+width: 50px;
+height: 50px;
+animation: spin 1s linear infinite; /* Spinning animation */
+margin-top: 10px; /* Add some space between the text and spinner */
+}
+
+/* Keyframes for spinning animation */
+@keyframes spin {
+0% { transform: rotate(0deg); }
+100% { transform: rotate(360deg); }
+}
+
+/* Style for the loading text */
+.loading-text {
+font-size: 18px;
+color: #333;
+font-weight: bold;
+}
+
+/*
+blogger label
+*/
+/* General label styling */
+.code-label {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 15px;
+    border-radius: 12px;
+    display: inline-block;
+    color: white;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  /* Colorful labels for different categories */
+  .label-0 {
+    background-color: #f8981d; /* Label 1 (Orange) */
+  }
+
+  .label-1 {
+    background-color: #4e5d6c; /* Label 2 (Grayish Blue) */
+  }
+
+  .label-2 {
+    background-color: #306998; /* Label 3 (Blue) */
+  }
+
+  .label-3 {
+    background-color: #a0522d; /* Label 4 (Sienna) */
+  }
+
+  .label-4 {
+    background-color: #8a2be2; /* Label 5 (BlueViolet) */
+  }
+
+  .label-5 {
+    background-color: #008cba; /* Label 6 (Deep Sky Blue) */
+  }
+
+  /* Hover effect */
+  .code-label:hover {
+    opacity: 0.8;
+  }
+
+  /*
+  Blogger No Post Related CSS
+  */
+  .terminal {
+    background-color: #111;
+    color: #00FF00;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    padding: 50px;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.2);
+    font-size: 1.2em;
+    line-height: 1.6;
+}
+
+.terminal p {
+    margin: 0;
+    animation: glitch 1s infinite alternate-reverse;
+}
+
+@keyframes glitch {
+    0% {
+        transform: translateX(0);
+        text-shadow: 2px 0 red, -2px 0 blue;
+    }
+    25% {
+        transform: translateX(-2px);
+        text-shadow: 1px 0 red, -1px 0 blue;
+    }
+    50% {
+        transform: translateX(2px);
+        text-shadow: 2px 0 red, -2px 0 blue;
+    }
+    75% {
+        transform: translateX(-1px);
+        text-shadow: 1px 0 red, -1px 0 blue;
+    }
+    100% {
+        transform: translateX(0);
+        text-shadow: 2px 0 red, -2px 0 blue;
+    }
+}
+
+.highlight {
+    color: salmon;
     font-weight: 500;
 }
