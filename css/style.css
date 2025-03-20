@@ -1,6 +1,7 @@
 html {
     height: 100%;
 }
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -9,9 +10,11 @@ body {
     color: black;
     text-align: center;
 }
-.left_align{
+
+.left_align {
     text-align: left;
 }
+
 .navbar {
     display: flex;
     justify-content: center;
@@ -23,10 +26,22 @@ body {
     z-index: 1000;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    overflow-x: auto; /* Allow horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of menu items */
 }
+@media (max-width: 768px) {
+    .navbar {
+        justify-content: normal;
+    }
+}
+.navbar::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for a cleaner look */
+}
+
 .navbar.shrink {
     padding: 5px;
 }
+
 .navbar a {
     color: white;
     text-decoration: none;
@@ -34,13 +49,18 @@ body {
     cursor: pointer;
     transition: 0.3s;
     font-size: 18px;
+    display: inline-block; /* Ensures items stay in a row */
 }
+
 .navbar.shrink a {
     font-size: 16px;
 }
-.navbar a:hover, .navbar a.active {
+
+.navbar a:hover,
+.navbar a.active {
     background: rgba(255, 255, 255, 0.2);
 }
+
 .content {
     display: none;
     padding: 100px 20px 50px;
@@ -49,15 +69,18 @@ body {
     max-width: 800px;
     margin: auto;
 }
+
 .content.active {
     display: block;
     opacity: 1;
 }
+
 .dummy-text {
     height: 100vh;
     text-align: left;
     padding: 20px;
 }
+
 
 .timeline {
     height: inherit;
@@ -74,6 +97,7 @@ a {
     color: #50585f;
     text-decoration: none;
 }
+
 a:hover {
     color: #383e44;
 }
@@ -83,72 +107,136 @@ a:hover {
 centered timeline css
 */
 @media (min-width: 822px) {
-#timeline-centered {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    margin: auto;
-    padding: 50px 0;
+    #timeline-centered {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 800px;
+        margin: auto;
+        padding: 50px 0;
+    }
+
+    #timeline-centered::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 4px;
+        background: #C5C5C5;
+        transform: translateX(-50%);
+    }
+
+    /* Timeline events */
+    .timeline-event {
+        position: relative;
+        width: 45%;
+        box-sizing: border-box;
+
+        display: flex;
+        flex-wrap: wrap;
+        /* Space between elements */
+        align-items: center;
+    }
+
+    /* Alternate event alignment */
+    .timeline-event:nth-child(odd) {
+        align-self: flex-end;
+        text-align: left;
+        
+    }
+
+    .timeline-event:nth-child(even) {
+        align-self: flex-start;
+        text-align: right;
+    }
+
+    /* Event markers (dots) */
+    .timeline-event::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: white;
+        ;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        border: 4px solid salmon;
+        z-index: 2;
+    }
+
+    .timeline-event:nth-child(odd)::before {
+        left: -48px;
+        /* Adjusted for alignment */
+    }
+
+    .timeline-event:nth-child(even)::before {
+        right: -48px;
+        /* Adjusted for alignment */
+    }
+
 }
 
-#timeline-centered::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 50%;
-    width: 4px;
-    background: #C5C5C5;
-    transform: translateX(-50%);
+
+@media (max-width: 821px) {
+
+    #timeline-centered {
+        position: relative;
+        display: table;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        /* margin-top: 1rem; */
+        width: 100%;
+    }
+
+    #timeline-centered::after {
+        content: '';
+        width: 4px;
+        position: absolute;
+        top: .5rem;
+        bottom: 0rem;
+        left: 4.4rem;
+        z-index: 1;
+        background: #C5C5C5;
+    }
+
+    /* Timeline events */
+    .timeline-event {
+        list-style-type: none;
+        padding: 0 0 0 75px;
+        max-width: 32rem;
+        font-size: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        /* Ensures labels wrap properly */
+        gap: 5px;
+        /* Space between elements */
+        align-items: center;
+    }
+
+
+    /* Event markers (dots) */
+    .timeline-event::before {
+        content: '';
+        width: 8px;
+        height: 8px;
+        background: white;
+        ;
+        position: absolute;
+        left: 4rem;
+        border-radius: 50%;
+        border: 4px solid salmon;
+        z-index: 2;
+    }
+    
+
 }
 
-/* Timeline events */
-.timeline-event {
-    position: relative;
-    width: 45%;
-    padding: 20px;
-    box-sizing: border-box;
-}
 
-/* Alternate event alignment */
-.timeline-event:nth-child(odd) {
-    align-self: flex-end;
-    text-align: left;
-    padding-left: 40px;
-}
-
-.timeline-event:nth-child(even) {
-    align-self: flex-start;
-    text-align: right;
-    padding-right: 40px;
-}
-
-/* Event markers (dots) */
-.timeline-event::before {
-    content: '';
-    width: 8px;
-    height: 8px;
-    background: white;;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    border-radius: 50%;
-    border: 4px solid salmon;
-    z-index: 2;
-}
-
-.timeline-event:nth-child(odd)::before {
-    left: -48px;  /* Adjusted for alignment */
-}
-
-.timeline-event:nth-child(even)::before {
-    right: -48px; /* Adjusted for alignment */
-}
-
-}
 /*
 general timeline css
 */
@@ -161,7 +249,8 @@ general timeline css
     /* margin-top: 1rem; */
     width: 100%;
 }
-#timeline div:after{
+
+#timeline div:after {
     content: '';
     width: 4px;
     position: absolute;
@@ -171,6 +260,7 @@ general timeline css
     z-index: 1;
     background: #C5C5C5;
 }
+
 #timeline h3 {
     position: -webkit-sticky;
     position: sticky;
@@ -180,23 +270,28 @@ general timeline css
     font-size: 1em;
     font-weight: 400;
 }
+
 @media (min-width: 62em) {
     #timeline h3 {
         font-size: 1.1em;
     }
 }
+
 #timeline section.year {
     position: relative;
 }
+
 #timeline section.year:first-child section {
     margin-top: -1.3em;
     padding-bottom: 0px;
 }
+
 #timeline section.year section {
     position: relative;
     padding-bottom: 1.25em;
     margin-bottom: 2.2em;
 }
+
 #timeline section.year section h4 {
     position: absolute;
     bottom: 0;
@@ -207,11 +302,13 @@ general timeline css
     padding: 0 0 0 89px;
     color: #C5C5C5;
 }
+
 @media (min-width: 62em) {
     #timeline section.year section h4 {
         font-size: 1em;
     }
 }
+
 #timeline section.year section ul {
     list-style-type: none;
     padding: 0 0 0 75px;
@@ -219,15 +316,18 @@ general timeline css
     max-width: 32rem;
     font-size: 1em;
 }
+
 @media (min-width: 62em) {
     #timeline section.year section ul {
         font-size: 1.1em;
         padding: 0 0 0 81px;
     }
 }
+
 #timeline section.year section ul:last-child {
     margin-bottom: 0;
 }
+
 #timeline section.year section ul:first-of-type:after {
     content: '';
     width: 8px;
@@ -243,18 +343,22 @@ general timeline css
     top: 3px;
     z-index: 2;
 }
+
 #timeline section.year section ul li {
     margin-left: 9rem;
     width: 100%;
 }
+
 #timeline section.year section ul li:before {
     content: '';
     margin-left: -.5rem;
     padding-right: .3rem;
 }
+
 #timeline section.year section ul li:not(:first-child) {
     margin-top: .4rem;
 }
+
 #timeline section.year section ul li span.price {
     color: mediumturquoise;
     font-weight: 500;
@@ -264,6 +368,7 @@ general timeline css
     color: #2c3e50;
     font-weight: bold;
 }
+
 span.software {
     color: #2c3e50;
     font-weight: 500;
@@ -274,35 +379,46 @@ Loading spin related css
 */
 
 .loader-container {
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 0;
-flex-direction: column; /* Stack text and spinner vertically */
-text-align: center; /* Center align the text and spinner */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    flex-direction: column;
+    /* Stack text and spinner vertically */
+    text-align: center;
+    /* Center align the text and spinner */
 }
 
 .loader {
-border: 8px solid #f3f3f3; /* Light gray background */
-border-top: 8px solid #3498db; /* Blue color for the spinner */
-border-radius: 50%;
-width: 50px;
-height: 50px;
-animation: spin 1s linear infinite; /* Spinning animation */
-margin-top: 10px; /* Add some space between the text and spinner */
+    border: 8px solid #f3f3f3;
+    /* Light gray background */
+    border-top: 8px solid #3498db;
+    /* Blue color for the spinner */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    /* Spinning animation */
+    margin-top: 10px;
+    /* Add some space between the text and spinner */
 }
 
 /* Keyframes for spinning animation */
 @keyframes spin {
-0% { transform: rotate(0deg); }
-100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* Style for the loading text */
 .loading-text {
-font-size: 18px;
-color: #333;
-font-weight: bold;
+    font-size: 18px;
+    color: #333;
+    font-weight: bold;
 }
 
 /*
@@ -310,51 +426,34 @@ blogger label
 */
 /* General label styling */
 .code-label {
+    display: inline-block; /* Ensures each label is treated separately */
     font-size: 14px;
     font-weight: bold;
     padding: 8px 15px;
     border-radius: 12px;
-    display: inline-block;
     color: white;
     text-align: center;
     text-transform: uppercase;
-    transition: all 0.3s ease;
-  }
+    transition: all 0.3s ease-in-out;
+    transform: scale(1);
+    margin: 2px;
+    white-space: nowrap; /* Prevents text wrapping */
+    user-select: none; /* Prevents accidental group selection */
+}
+.code-labelsel {
+    user-select: text;
+}
 
-  /* Colorful labels for different categories */
-  .label-0 {
-    background-color: #f8981d; /* Label 1 (Orange) */
-  }
+.code-label:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+}
 
-  .label-1 {
-    background-color: #4e5d6c; /* Label 2 (Grayish Blue) */
-  }
 
-  .label-2 {
-    background-color: #306998; /* Label 3 (Blue) */
-  }
-
-  .label-3 {
-    background-color: #a0522d; /* Label 4 (Sienna) */
-  }
-
-  .label-4 {
-    background-color: #8a2be2; /* Label 5 (BlueViolet) */
-  }
-
-  .label-5 {
-    background-color: #008cba; /* Label 6 (Deep Sky Blue) */
-  }
-
-  /* Hover effect */
-  .code-label:hover {
-    opacity: 0.8;
-  }
-
-  /*
+/*
   Blogger No Post Related CSS
   */
-  .terminal {
+.terminal {
     background-color: #111;
     color: #00FF00;
     font-family: 'Courier New', Courier, monospace;
@@ -382,18 +481,22 @@ blogger label
         transform: translateX(0);
         text-shadow: 2px 0 red, -2px 0 blue;
     }
+
     25% {
         transform: translateX(-2px);
         text-shadow: 1px 0 red, -1px 0 blue;
     }
+
     50% {
         transform: translateX(2px);
         text-shadow: 2px 0 red, -2px 0 blue;
     }
+
     75% {
         transform: translateX(-1px);
         text-shadow: 1px 0 red, -1px 0 blue;
     }
+
     100% {
         transform: translateX(0);
         text-shadow: 2px 0 red, -2px 0 blue;
@@ -404,3 +507,4 @@ blogger label
     color: salmon;
     font-weight: 500;
 }
+
